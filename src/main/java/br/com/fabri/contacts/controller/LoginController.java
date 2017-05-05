@@ -11,6 +11,7 @@ import br.com.caelum.vraptor.validator.Validator;
 import br.com.fabri.contacts.dao.UserDao;
 import br.com.fabri.contacts.model.LoggedUser;
 import br.com.fabri.contacts.model.User;
+import br.com.fabri.contacts.util.Public;
 
 @Controller
 public class LoginController {
@@ -33,10 +34,12 @@ public class LoginController {
 		this(null, null, null, null); // CDI eyes only
 	}
 
+	@Public
 	@Get
 	public void form() {
 	}
 
+	@Public
 	@Post
 	public void authenticate(User user) {
 		if (!userDao.exists(user)) {

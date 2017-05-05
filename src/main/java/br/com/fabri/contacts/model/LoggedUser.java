@@ -1,11 +1,15 @@
 package br.com.fabri.contacts.model;
 
+import java.io.Serializable;
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 @Named
 @SessionScoped
-public class LoggedUser {
+public class LoggedUser implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private User user;
 
@@ -15,6 +19,10 @@ public class LoggedUser {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public boolean isLogged() {
+		return user != null;
 	}
 	
 }
