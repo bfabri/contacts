@@ -1,48 +1,43 @@
 package br.com.fabri.contacts.dao;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 
 import br.com.fabri.contacts.model.Contact;
 
-@Named
-@ApplicationScoped
-public class ContactDao implements Serializable {
+@RequestScoped
+public class ContactDao {
 
-	private static final long serialVersionUID = 1L;
+	private final DynamoDBMapper mapper;
 
-	private final Map<String, Contact> contacts;
+	@Inject
+	public ContactDao(DynamoDBMapper mapper) {
+		this.mapper = mapper;
+	}
 	
+	@Deprecated
 	public ContactDao() {
-		this.contacts = new HashMap<>();
-		this.contacts.put("1", new Contact("1", "Bruno", "(21) 99520-9502", "fabri@gmail.com"));
-		this.contacts.put("2", new Contact("2", "Gabi", "(21) 99990-9202", "gabi@gmail.com"));
-		this.contacts.put("3", new Contact("3", "Jonas", "(21) 98526-9522", "jonas@gmail.com"));
+		this(null);
 	}
 	
 	public List<Contact> list() {
-		return new ArrayList<>(contacts.values());
+		return mapper.scan(Contact.class, new DynamoDBScanExpression());
 	}
 	
 	public void save(Contact contact) {
-		contacts.put(contact.getId(), contact);
-	}
-	
-	public void update(Contact contact) {
-		contacts.put(contact.getId(), contact);
+		mapper.save(contact);
 	}
 	
 	public void delete(Contact contact) {
-		contacts.remove(contact.getId());
+		mapper.delete(contact);
 	}
 	
 	public Contact getById(String id) {
-		return contacts.get(id);
+		return mapper.load(Contact.class, id);
 	}
 }

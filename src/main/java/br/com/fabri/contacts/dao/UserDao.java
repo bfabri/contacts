@@ -2,26 +2,42 @@ package br.com.fabri.contacts.dao;
 
 import java.security.NoSuchAlgorithmException;
 
+import javax.inject.Inject;
+
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+
 import br.com.fabri.contacts.model.User;
 import br.com.fabri.contacts.util.PasswordUtils;
 
 public class UserDao {
 
-	private User user;
+	private final DynamoDBMapper mapper;
+
+	@Inject
+	public UserDao(DynamoDBMapper mapper) {
+		this.mapper = mapper;
+	}
 	
+	@Deprecated
 	public UserDao() {
-		 try {
-			user = new User("fabri@gmail.com", PasswordUtils.createHash("Q1w2e3r4"));
-		} catch (NoSuchAlgorithmException e) {
-			user = new User("fabri@gmail.com", "blah");
-		}
+		this(null);
 	}
 	
 	public boolean exists(User user) {
+		User loadedUser = mapper.load(User.class, user.getEmail());
+		if (loadedUser == null) {
+			return false;
+		}
+		
 		try {
-			return this.user.getEMail().equals(user.getEMail()) && PasswordUtils.isCorrectPassword(user.getPassword(), this.user.getPassword());
+			return PasswordUtils.isCorrectPassword(user.getPassword(), loadedUser.getPassword());
 		} catch (NoSuchAlgorithmException e) {
 			return false;
 		}
+	}
+	
+	public static void main(String[] args) throws NoSuchAlgorithmException {
+		System.out.println(PasswordUtils.createHash("1255!M1@Oaj6"));
+		System.out.println(PasswordUtils.createHash("Q1w2e3r4"));
 	}
 }

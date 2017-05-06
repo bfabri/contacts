@@ -58,11 +58,7 @@ public class ContactController {
 	public void save(@Valid Contact contact) {
 		validator.onErrorRedirectTo(this).form(contact);
 		
-		if (contact.hasId()) {
-			contactDao.update(contact);
-		} else {
-			contactDao.save(contact);
-		}
+		contactDao.save(contact);
 		
 		result.include("message", "Contato salvo com sucesso");
 		result.redirectTo(this).list();

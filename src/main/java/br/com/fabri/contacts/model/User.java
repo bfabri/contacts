@@ -1,7 +1,16 @@
 package br.com.fabri.contacts.model;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+
+@DynamoDBTable(tableName = "User")
 public class User {
+	
+	@DynamoDBHashKey(attributeName = "email")
 	private String email;
+	
+	@DynamoDBAttribute(attributeName = "password")
 	private String password;
 
 	public User() {
@@ -12,11 +21,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getEMail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEMail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 

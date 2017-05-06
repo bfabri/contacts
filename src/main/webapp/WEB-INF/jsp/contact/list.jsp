@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/bootstrap/css/bootstrap.css"/>">
     </head>
     <body>
-    	<a href="<c:url value="logout" />">Logout</a>
+    	<span>Bem vindo ${loggedUser.user.email} <a href="<c:url value="logout" />">[Logout]</a></span>
     	
     	<h1>Lista de contatos</h1>
         
