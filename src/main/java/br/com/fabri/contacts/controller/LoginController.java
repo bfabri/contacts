@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
@@ -14,6 +15,7 @@ import br.com.fabri.contacts.model.User;
 import br.com.fabri.contacts.util.Public;
 
 @Controller
+@Path("login")
 public class LoginController {
 
 	private final UserDao userDao;
@@ -47,6 +49,6 @@ public class LoginController {
 			validator.onErrorRedirectTo(this).form();
 		}
 		loggedUser.setUser(user);
-		result.redirectTo(ContactController.class).init();
+		result.redirectTo(ContactController.class).list();
 	}
 }
