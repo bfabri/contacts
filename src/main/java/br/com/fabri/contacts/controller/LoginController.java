@@ -15,7 +15,6 @@ import br.com.fabri.contacts.model.User;
 import br.com.fabri.contacts.util.Public;
 
 @Controller
-@Path("login")
 public class LoginController {
 
 	private final UserDao userDao;
@@ -38,11 +37,13 @@ public class LoginController {
 
 	@Public
 	@Get
+	@Path("/login")
 	public void form() {
 	}
 
 	@Public
 	@Post
+	@Path("/login")
 	public void authenticate(User user) {
 		if (!userDao.exists(user)) {
 			validator.add(new I18nMessage("login", "login.invalid"));
@@ -51,4 +52,11 @@ public class LoginController {
 		loggedUser.setUser(user);
 		result.redirectTo(ContactController.class).list();
 	}
+	
+	@Get
+	@Path("/logout")
+    public void logout() {
+		loggedUser.setUser(null);
+		result.redirectTo(this).form();
+    }
 }

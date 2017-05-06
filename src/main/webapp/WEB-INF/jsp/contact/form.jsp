@@ -9,6 +9,8 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/bootstrap/css/bootstrap.css"/>">
     </head>
     <body>
+    	<a href="<c:url value="/logout" />">Logout</a>
+    	
         <h1>Formulário de contato</h1>
         
         <c:if test="${not empty errors}">

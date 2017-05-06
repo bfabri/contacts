@@ -5,11 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login</title>
-<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="<c:url value="/bootstrap/css/bootstrap.css"/>">
 </head>
 <body>
 	<div style="width: 50%">
-		<form class="form-signin" action="<c:url value='/login/authenticate'/>" method="post">
+		<form class="form-signin" action="<c:url value='/login'/>" method="post">
 			<h2 class="form-signin-heading">Faça login para acessar a agenda de contatos</h2>
 			<input type="text" class="form-control" name="user.email" placeholder="Email" /> 
 			<input type="password" class="form-control" name="user.password" placeholder="Senha" />
