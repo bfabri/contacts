@@ -13,13 +13,16 @@
         
         <c:if test="${not empty errors}">
         	<div class="alert alert-danger">
-		        <c:forEach var="error" items="${errors}">
-		        	${error.message}<br />
-				</c:forEach>
+        		<ul>
+			        <c:forEach var="error" items="${errors}">
+			        	<li>${error.message}</li>
+					</c:forEach>
+				</ul>
         	</div>
 		</c:if>
 
         <form action="<c:url value='/save'/>" method="post">
+        	<input type="hidden" name="contact.id" value="${contact.id}" />
             Nome: <input class="form-control" type="text" name="contact.name" value="${fn:escapeXml(contact.name)}" />
             Telefone: <input class="form-control" type="text" name="contact.phone" value="${fn:escapeXml(contact.phone)}" />
             Email: <input class="form-control" type="text" name="contact.email" value="${fn:escapeXml(contact.email)}"/>

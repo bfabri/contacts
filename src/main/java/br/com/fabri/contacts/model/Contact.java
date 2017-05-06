@@ -62,4 +62,8 @@ public class Contact {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public boolean hasId() {
+		return this.id != null && !this.id.isEmpty();
+	}
 }

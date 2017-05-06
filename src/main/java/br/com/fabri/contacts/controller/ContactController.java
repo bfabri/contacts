@@ -46,14 +46,25 @@ public class ContactController {
 		result.include("contact", contact);
 	}
 	
+	@Get
+	@Path("/{contact.id}/edit")
+	public void edit(Contact contact) {
+		contact = contactDao.getById(contact.getId());
+		result.forwardTo(this).form(contact);
+	}
+	
 	@Post
 	@Path("/save")
 	public void save(@Valid Contact contact) {
 		validator.onErrorRedirectTo(this).form(contact);
 		
-		contactDao.save(contact);
+		if (contact.hasId()) {
+			contactDao.update(contact);
+		} else {
+			contactDao.save(contact);
+		}
 		
-		result.include("message", "Contato adicionado com sucesso");
+		result.include("message", "Contato salvo com sucesso");
 		result.redirectTo(this).list();
 	}
 	

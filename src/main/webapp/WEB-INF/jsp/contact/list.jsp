@@ -30,6 +30,10 @@
                     	<td><c:out value="${contact.phone}"/></td>
                     	<td><c:out value="${contact.email}"/></td>
                     	<td>
+                    		<a class="btn btn-default" role="button" href="<c:url value='${contact.id}/edit'/>">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+							</a>
+							
                     		<form action="<c:url value="/delete"/>" method="post" onsubmit="return confirm('Deseja realmente apagar o contato?');">
                     			<input type="hidden" name="contact.id" value="${contact.id}" />
 	                    		<button type="submit" class="btn btn-default delete" aria-label="Left Align">
@@ -41,6 +45,6 @@
             	</c:forEach>
 			</tbody>
         </table>
-        <a href="<c:url value='/form'/>">Adicionar novo contato</a>
+        <a class="btn btn-primary" role="button" href="<c:url value='/form'/>">Adicionar novo contato</a>
     </body>
 </html>
