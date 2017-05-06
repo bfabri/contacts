@@ -35,9 +35,4 @@ public class UserDao {
 			return false;
 		}
 	}
-	
-	public static void main(String[] args) throws NoSuchAlgorithmException {
-		System.out.println(PasswordUtils.createHash("1255!M1@Oaj6"));
-		System.out.println(PasswordUtils.createHash("Q1w2e3r4"));
-	}
 }
