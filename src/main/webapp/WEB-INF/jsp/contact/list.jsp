@@ -20,6 +20,7 @@
                 	<th>Nome</th>
                     <th>Telefone</th>
                     <th>Email</th>
+                    <th></th>
                 </tr>
         	</thead>
             <tbody>
@@ -28,6 +29,14 @@
                     	<td><c:out value="${contact.name}"/></td>
                     	<td><c:out value="${contact.phone}"/></td>
                     	<td><c:out value="${contact.email}"/></td>
+                    	<td>
+                    		<form action="<c:url value="/delete"/>" method="post" onsubmit="return confirm('Deseja realmente apagar o contato?');">
+                    			<input type="hidden" name="contact.id" value="${contact.id}" />
+	                    		<button type="submit" class="btn btn-default delete" aria-label="Left Align">
+	  								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+							</form>
+                    	</td>
                 	</tr>
             	</c:forEach>
 			</tbody>

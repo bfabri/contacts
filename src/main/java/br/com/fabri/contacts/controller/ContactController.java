@@ -56,4 +56,13 @@ public class ContactController {
 		result.include("message", "Contato adicionado com sucesso");
 		result.redirectTo(this).list();
 	}
+	
+	@Post
+	@Path("/delete")
+	public void delete(Contact contact) {
+		contactDao.delete(contact);
+		
+		result.include("message", "Contato removido com sucesso");
+		result.redirectTo(this).list();
+	}
 }
