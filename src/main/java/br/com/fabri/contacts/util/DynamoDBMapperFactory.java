@@ -4,8 +4,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
@@ -20,7 +19,7 @@ public class DynamoDBMapperFactory {
 	@Produces
 	public DynamoDBMapper createDynamoDBMapper() {
 		AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-			.withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials("AKIAJRYPQW7PTV6OPTFA", "I3gjV1FAkKBoUvYJdVZK5WRGYEwlzDhnPLfHlfrb")))
+			.withCredentials(new DefaultAWSCredentialsProviderChain())
 			.withRegion(Regions.US_EAST_1)
 			.build();
 		
